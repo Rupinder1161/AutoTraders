@@ -1,0 +1,115 @@
+.mainDiv{
+    display: flex;
+    flex-flow: column;
+    justify-content: start;
+    align-self: center;
+    flex:0.2;
+    background-color: rgb(230, 230, 230);
+    color: black;
+    border-right:1px solid gray;
+    border-bottom: 1px solid grey;
+    
+}
+.Option{
+    width:90%;
+    padding-top:20px ;
+    padding-bottom:20px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: start;
+    font-size: 20px;
+    font-weight: 500;
+    color:rgb(42, 40, 40);
+    align-items: center;
+}
+.Option > *{
+    padding-left: 20px;
+}
+.expnadMain{
+    width:"100%" !important;
+}
+.MuiAccordion-root{
+    width:100%;
+}
+ .MuiTypography-root {
+    margin-left: 10px !important;
+}
+
+
+@media (max-width: 600px) {
+    .mainDiv{
+        display: flex;
+        flex:1 !important;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-self: center;
+        background-color: rgb(230, 230, 230);
+        width:100%;
+        color: black;
+    }
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 30px;
+      /* height: 50px; */
+      padding: 13px;
+    }
+    .nav > .nav-btn > label:hover,
+    .nav #nav-check:checked ~ .nav-btn > label {
+      text-align: center;
+      margin-right: 10px;
+      transform: scale(1.1);
+      transition: all 0.3s ease-in;
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid rgb(7, 7, 7);
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      text-align: center;
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 50px;
+      left: 0px;
+    }
+  
+    .nav > .nav-links > a {
+      display: block;
+      width: 80%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(50vh - 50px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+  
+  .centeralData {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .centeralData > h1 {
+    width: 50%;
+    min-width: 400px;
+    color: black;
+    text-shadow: 1px 0px 20px rgb(218, 56, 202);
+  }
+  
