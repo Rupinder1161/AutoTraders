@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./firstside.css";
 
 //expansion
@@ -29,10 +29,21 @@ import Slider from "@material-ui/core/Slider";
 
 //import data
 import InternalData from "./InternalData";
-
+import InternalDataModel from "./InternalDataModel";
+import BodyStyle from "./BodyStyle";
 //hooks
 
+import { useSelector, useDispatch } from "react-redux";
+import { intialRequest, changeprice, changemodel, changebody } from "../actions";
+
 //dynmaic functions
+
+const object1 = {
+  a: "somestring",
+  b: 42,
+  c: false,
+};
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -90,13 +101,25 @@ const enginemarks = [
     label: "4000 CC",
   },
 ];
-function valuetext(value) {
-  console.log(value);
-  return `${value}`;
-}
+
+
 
 function PriceBar({ defaultValue, step, marks, max, namel }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [state, setState] = React.useState(
+   20
+  );
+
+  const valuetext = (value) => {
+    setState(value)
+    return value;
+  }
+
+  const onChange = () =>{
+    dispatch(changeprice(state))
+  }
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-always" gutterBottom>
@@ -109,8 +132,7 @@ function PriceBar({ defaultValue, step, marks, max, namel }) {
         step={step}
         marks={marks}
         max={max}
-        trackInverted
-        thumbColorSecondary
+        onChange={()=>{onChange()}}
         valueLabelDisplay="on"
       />
     </div>
@@ -130,8 +152,8 @@ function Option({
   namel,
 }) {
   return (
-    <div class="Option">
-      <Accordion classname="expnadMain">
+    <div className="Option">
+      <Accordion className="expnadMain">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -147,6 +169,8 @@ function Option({
             max={max}
             marks={marks}
             namel={namel}
+            Suzuki={true}
+            data={object1}
           />
         </AccordionDetails>
       </Accordion>
@@ -155,11 +179,20 @@ function Option({
 }
 
 function FirstSide() {
+  const cool = useSelector((state) => state.data);
+  const make = useSelector((state) => state.categories);
+  const dispatch = useDispatch();
+
   return (
     <div className="mainDiv">
       <Option name="Make" Icon={LocalActivityIcon} Internal={InternalData} />
-      <Option name="Model" Icon={DriveEtaIcon} Internal={InternalData} />
-      <Option name="Make" Icon={HourglassEmptyIcon} Internal={InternalData} />
+      <Option
+        name="Model"
+        Icon={DriveEtaIcon}
+        changemethod={changemodel}
+        Internal={InternalDataModel}
+      />
+      <Option name="BodyStyle" Icon={HourglassEmptyIcon} Internal={BodyStyle} />
       <Option
         name="Price"
         Icon={AttachMoneyIcon}

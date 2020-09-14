@@ -3,25 +3,24 @@ import Button from "@material-ui/core/Button";
 import "./product.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
-import EmailIcon from '@material-ui/icons/Email';
+import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
+import EmailIcon from "@material-ui/icons/Email";
 // import Navbar from "./navbar";
 //import hooks & redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { increment, updateCart } from "../actions";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Product(props) {
-  // const dispatch = useDispatch();
-  // const state = useSelector((state) => state.data);
-  // const cart = useSelector((state) => state.cart);
-  // const [carty, setCarty] = useState();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.data);
+  const cart = useSelector((state) => state.cart);
 
-  // const filteredItem = state.filter((e) => e._id === props.match.params.id);
-  // console.log(filteredItem[0]);
-  // const senddata = () => {
-  //   dispatch(increment("hello"));
-  //   console.log("data sent");
-  // };
+  const filteredItem = state.filter((e) => e._id === props.match.params.id);
+  const Item = filteredItem[0];
+  const similar = state.filter(
+    (e) => e.Body == filteredItem.map((e) => e.Body)
+  );
+  console.log(similar);
+
   return (
     <div className="bodyWrap">
       <div className="productStage">
@@ -32,76 +31,86 @@ export default function Product(props) {
           </div>
         </div>
         <div className="botBorder">
-        <div className="mainFlex">
-          <div className="productImage">
-            <img
-            className="Img"
-              width="300px"
-              height="300px"
-              src="https://i.pinimg.com/736x/b5/00/59/b50059cdb7dbc1ed94b199732f7f7a35.jpg"
-              // {filteredItem.map((e) => e.Piclink)}
-            />
-            <ul className="imageList">
-              <li>
-                <a href="#">
-                  <img
-                    src="https://www.ford.co.nz/content/dam/Ford/website-assets/ap/nz/Cars/Mustang-Desktop.jpg/_jcr_content/renditions/small.jpeg"
-                    height="92px"
-                    width="92px"
-                    alt="92x92"
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img
-                    src="https://www.ford.co.nz/content/dam/Ford/website-assets/ap/nz/Cars/Mustang-Desktop.jpg/_jcr_content/renditions/small.jpeg"
-                    height="92px"
-                    width="92px"
-                    alt="92x92"
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <img
-                    src="https://www.ford.co.nz/content/dam/Ford/website-assets/ap/nz/Cars/Mustang-Desktop.jpg/_jcr_content/renditions/small.jpeg"
-                    height="92px"
-                    width="92px"
-                    alt="92x92"
-                  />
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="overview">
-            <h1>Maruti Swift 2007</h1>
-            <h2>$20,000</h2>
-            {/* <h1>{filteredItem.map((e) => e.FoodName)}</h1>
+          <div className="mainFlex">
+            <div className="productImage">
+              <img
+                className="Img"
+                width="300px"
+                height="300px"
+                src={filteredItem.map((e) => e.Pic)}
+                // {filteredItem.map((e) => e.Piclink)}
+              />
+              <ul className="imageList">
+                <li>
+                  <a href="#">
+                    <img
+                      src={filteredItem.map((e) => e.Pic)}
+                      height="92px"
+                      width="92px"
+                      alt="92x92"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img
+                      src={filteredItem.map((e) => e.Pic)}
+                      height="92px"
+                      width="92px"
+                      alt="92x92"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img
+                      src={filteredItem.map((e) => e.Pic)}
+                      height="92px"
+                      width="92px"
+                      alt="92x92"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="overview">
+              <h1>{filteredItem.map((e) => e.name)}</h1>
+              <h2>${filteredItem.map((e) => e.Price)}</h2>
+              {/* <h1>{filteredItem.map((e) => e.FoodName)}</h1>
             <h2>{filteredItem.map((e) => e.VenueName)}</h2> */}
-            <span className="rating">
-              <img src="sbahgh" alt="DESCRIPTION" />
-            </span>
-            {/* <h3>${filteredItem.map((e) => e.Price)}.00</h3> */}
-            {/* <span>50+ available</span> */}
-            <span className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              aliquam elementum est, at vestibulum augue consequat at. Donec
-              euismod convallis felis. Nam sed molestie dolor. Proin in tortor
-              sed augue consequat viverra.
-            </span>
-             <div className="contactMe">
-               <h3 style={{width:"100%",color:"black",textDecoration:"underline",textDecorationColor:"green"}}>Contact Below for Inquiry</h3>
-               <div className="PhoneNumber">
-               <PhoneAndroidIcon style={{color:"gray"}}/><h3 style={{paddingLeft:"20px"}}>0224576040</h3>
-               </div>
-               <div className="Email">
-               <EmailIcon style={{color:"gray"}}/><h3 style={{paddingLeft:"20px"}}>gurpreet1161@gmail.com</h3>
-               </div>
-             </div>
+              <span className="rating">
+                <img src="sbahgh" alt="DESCRIPTION" />
+              </span>
+              {/* <h3>${filteredItem.map((e) => e.Price)}.00</h3> */}
+              {/* <span>50+ available</span> */}
+              <span className="description">
+                <br />
+                {filteredItem.map((e) => e.message)}
+              </span>
+              <div className="contactMe">
+                <h3
+                  style={{
+                    width: "100%",
+                    color: "black",
+                    textDecoration: "underline",
+                    textDecorationColor: "green",
+                  }}
+                >
+                  Contact Below for Inquiry
+                </h3>
+                <div className="PhoneNumber">
+                  <PhoneAndroidIcon style={{ color: "gray" }} />
+                  <h3 style={{ paddingLeft: "20px" }}>0224576040</h3>
+                </div>
+                <div className="Email">
+                  <EmailIcon style={{ color: "gray" }} />
+                  <h3 style={{ paddingLeft: "20px" }}>
+                    gurpreet1161@gmail.com
+                  </h3>
+                </div>
+              </div>
 
-
-            {/* <select className="prodSelect">
+              {/* <select className="prodSelect">
               <option selected>Current Product</option>
               <option>Product Option 2</option>
               <option>Product Option 3</option>
@@ -109,8 +118,7 @@ export default function Product(props) {
               <option>Product Option 5</option>
             </select> */}
 
-
-            {/* <button
+              {/* <button
               className="button add"
               // onClick={() => {
               //   senddata();
@@ -118,32 +126,31 @@ export default function Product(props) {
             >
               Add to Cart
             </button> */}
-            {/* <div className="button wish">Add to Wishlist</div> */}
-          </div> </div>
+              {/* <div className="button wish">Add to Wishlist</div> */}
+            </div>{" "}
+          </div>
 
-
-
-
-                   <div className="info">
+          <div className="info">
             <h3>Vehicle Information</h3>
             <ul className="specs">
               <li>
-                <h5>Engine:</h5> 1500cc, Petrol
+                <h5>Engine:</h5> {filteredItem.map((e) => e.EngineSize)}cc,{" "}
+                {filteredItem.map((e) => e.FuelType)}
               </li>
               <li>
-                <h5>Body :</h5> Hatchback
+                <h5>Body :</h5> {filteredItem.map((e) => e.Body)}
               </li>
               <li>
-                <h5>Odometer:</h5> 82,750km
+                <h5>Odometer:</h5> {filteredItem.map((e) => e.OdoMeter)} km
               </li>
               <li>
-                <h5>Ext Colour:</h5> pearl white
+                <h5>Ext Colour:</h5> {filteredItem.map((e) => e.ExtColour)}
               </li>
               <li>
-                <h5>Interior:</h5> Black, 5 seats
+                <h5>Interior:</h5> {filteredItem.map((e) => e.Interior)}
               </li>
               <li>
-                <h5>Transmission:</h5> Auto
+                <h5>Transmission:</h5> {filteredItem.map((e) => e.Transmision)}
               </li>
             </ul>
 
@@ -160,23 +167,27 @@ export default function Product(props) {
 
           <div className="info">
             <h3> Similar Vehlicles</h3>
-            <div className="product vtop soft">
-              <a href="#">
-                <div className="smallBox">
-                  <img
-                    style={{ width: "92px", height: "92px" }}
-                    src="https://www.ford.co.nz/content/dam/Ford/website-assets/ap/nz/Cars/Mustang-Desktop.jpg/_jcr_content/renditions/small.jpeg"
-                  />
-                </div>
-                <span className="manuName">
-                  <h4>Maruti Swift 2007</h4>
-                </span>
-                <span className="prodName">
-                  <h2>Hatchback</h2>
-                </span>
-              </a>
-              <span className="prodPrice">$20000.00</span>
-            </div>
+
+            {similar.map((e) => (
+              <div className="product vtop soft">
+                <a href="#">
+                  <div className="smallBox">
+                    <img
+                      style={{ width: "92px", height: "92px" }}
+                      src={e.Pic}
+                    />
+                  </div>
+                  <span className="manuName">
+                    <h4>{e.name}</h4>
+                  </span>
+                  <span className="prodName">
+                    <h2>{e.Body}</h2>
+                  </span>
+                </a>
+                <span className="prodPrice">${e.Price}.00</span>
+              </div>
+            ))}
+
             {/* {state.map((e) => (
               <div className="product vtop soft">
                 <a href="#">

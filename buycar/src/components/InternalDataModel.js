@@ -7,24 +7,31 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 
-//hooks
+//import redux tools
 import { useSelector, useDispatch } from "react-redux";
 import { intialRequest, changemake, changemodel } from "../actions";
 
-function InternalData(props) {
+function InternalDataModel(props) {
   const cool = useSelector((state) => state.data);
   const make = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-  // console.log(make)
 
-  const [state, setState] = React.useState(make);
-  const { Suzuki, kia, Honda } = state;
+  const [state, setState] = React.useState({
+    Suzuki: true,
+    kia: true,
+    Honda: true,
+  });
+
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
+    dispatch(
+      changemodel({ ...state, [event.target.name]: event.target.checked })
+    );
   };
 
-  // dispatch(changemodel([Suzuki,kia,Honda]))
+  const { Suzuki, kia, Honda } = state;
   const error = [Suzuki, kia, Honda].filter((v) => v).length >= 2;
+  // console.log([Suzuki,kia,Honda])
   return (
     <FormControl component="fieldset">
       <FormGroup>
@@ -51,4 +58,4 @@ function InternalData(props) {
   );
 }
 
-export default InternalData;
+export default InternalDataModel;

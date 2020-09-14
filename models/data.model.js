@@ -6,6 +6,7 @@ const exerciseSchema = new Schema(
   {
     name: { type: String },
     Make: { type: String },
+    Pic: { type: String },
     Model: { type: String },
     Price: { type: Number },
     Mileage: { type: Number },

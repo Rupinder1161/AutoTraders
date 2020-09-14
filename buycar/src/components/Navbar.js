@@ -11,13 +11,13 @@ import PersonIcon from '@material-ui/icons/Person';
 function Navbar() {
   return (
     <div className="Navbar_main">
-      <div class="LeftList">
-        <div class="Logo">CAR HUNT</div>
+      <div className="LeftList">
+        <div className="Logo">CAR HUNT</div>
         <h3>Vehicles</h3>
         <h3>Service</h3>
         <h3>Finance</h3>
       </div>
-      <div class="RightIcon">
+      <div className="RightIcon">
          <SearchIcon/>
         <h4><PersonIcon style={{paddingRight:"5px"}}/> Sign In</h4>
       </div>
